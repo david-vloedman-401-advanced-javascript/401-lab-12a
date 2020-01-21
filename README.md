@@ -21,7 +21,9 @@ The LinkedIn API uses OAuth 2.0 for user authorization and API authentication. A
 
 ### Ratings and Reviews
 #### Documentation
-Thoughts go here
+The documentation is very straight-forward and goes through each step. Getting an app registered with linkedin, getting a code, using the code to get a token, making authenticated requests and keeping tokens alive. 
+
+Some small details such as requiring the post request to be submit as a type form, rather than JSON are within the documentation through example requests, but are not explicity addressed. 
 
 #### Systems Requirements
 The requirements for the access to the LinkedIn OAuth is that you register your application through `https://www.linkedin.com/developers/apps/new`. Upon registering your application, the client must have a unique identifier (`state`) that is granted by LinkedIn. You must pass the authorization route `scope`, `redirect_uri`, `response_type` and `code`. LinkedIn OAuth is able to be used in both AWS and Heroku. It does not require a certain database.
@@ -37,13 +39,10 @@ OAuth is very popular within the JS community. It is widely used in mobile, web 
 * [examples/tutorials](https://requests-oauthlib.readthedocs.io/en/latest/examples/linkedin.html)
 
 ### Code Demos
-* [live/running application](http://xyz.com)
-* [code repository](http://xyz.com)
+* [live/running application](https://unlinkedin.herokuapp.com/)
+* If you see this, you're on the repo
 
 ### Operating Instructions
-If someone were to download your repo (above), what steps do they need to take to run the application
+* clone repo
 * `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
+
