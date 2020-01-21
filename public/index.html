@@ -14,23 +14,23 @@
 
   <script>
 
-    let URL = "https://github.com/login/oauth/authorize";
+    let URL = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=866713utw3sd6v&redirect_uri=http://localhost:3000/oauth&scope=r_liteprofile%20r_emailaddress%20w_member_social";
 
-    let options = {
-      client_id: '35e8de24061ca19f4296',
-      redirect_uri: 'http://localhost:3000/oauth',
-      scope: 'read:user',
-      state: 'asldfjdfs'
-    }
+    // let options = {
+    //   client_id: '866713utw3sd6v',
+    //   redirect_uri: 'http://localhost:3000/oauth',
+    //   scope: 'scope=r_liteprofile%20r_emailaddress%20w_member_social',
+    //   //state: 'asldfjdfs'
+    // }
 
-    let QueryString = Object.keys(options).map((key) => {
-      return `${key}=` + encodeURIComponent(options[key]);
-    }).join("&");
+    // let QueryString = Object.keys(options).map((key) => {
+    //   return `${key}=` + encodeURIComponent(options[key]);
+    // }).join("&");
 
-    let authURL = `${URL}?${QueryString}`;
+    // let authURL = `${URL}?${QueryString}`;
 
     let link = document.getElementById('oauth');
-    link.setAttribute('href', authURL);
+    link.setAttribute('href', URL);
 
   </script>
 

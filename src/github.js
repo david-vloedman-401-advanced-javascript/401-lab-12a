@@ -2,6 +2,7 @@
 
 const superagent = require('superagent');
 const users = require('./users.js');
+require('dotenv').config();
 
 /*
   Resources
@@ -15,8 +16,9 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const API_SERVER = process.env.API_SERVER;
 
 module.exports = async function authorize(req, res, next) {
-
+ 
   try {
+    console.log(req.query);
     let code = req.query.code;
     console.log('(1) CODE:', code);
 
@@ -24,7 +26,7 @@ module.exports = async function authorize(req, res, next) {
     console.log('(2) ACCESS TOKEN:', remoteToken)
 
     let remoteUser = await getRemoteUserInfo(remoteToken);
-    console.log('(3) GITHUB USER', remoteUser)
+    console.log('(3) GITHUB USER', remoteUser);
 
     let [user, token] = await getUser(remoteUser);
     req.user = user;
@@ -38,16 +40,18 @@ module.exports = async function authorize(req, res, next) {
 
 async function exchangeCodeForToken(code) {
 
-  let tokenResponse = await superagent.post(tokenServerUrl).send({
-    code: code,
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
-    redirect_uri: API_SERVER,
-    grant_type: 'authorization_code',
-  })
 
+  console.log(tokenServerUrl);
+
+    let tokenResponse = await superagent.post(tokenServerUrl).type('form').send({
+      code: code,
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      redirect_uri: API_SERVER,
+      grant_type: 'authorization_code'
+    });
   let access_token = tokenResponse.body.access_token;
-
+  console.log(access_token);
   return access_token;
 
 }
@@ -57,7 +61,7 @@ async function getRemoteUserInfo(token) {
   let userResponse =
     await superagent.get(remoteAPI)
       .set('user-agent', 'express-app')
-      .set('Authorization', `token ${token}`)
+      .set('Authorization', `Bearer ${token}`)
 
   let user = userResponse.body;
 
